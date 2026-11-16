@@ -1,0 +1,8 @@
+{
+  "name": "dil",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Digital Investment Learning : application statique + API de l'assistant IA",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}

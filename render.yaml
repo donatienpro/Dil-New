@@ -1,0 +1,34 @@
+# Déploiement DIL sur Render (New > Blueprint). Les secrets ne sont jamais écrits ici : Render les demande à la création.
+services:
+  - type: web
+    name: dil-pioneers-api
+    runtime: node
+    region: frankfurt
+    plan: free
+    buildCommand: echo "aucune dépendance"
+    startCommand: node server.js
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: ALLOWED_ORIGINS
+        value: https://dil-pioneers.onrender.com
+      - key: ADMIN_USERNAMES
+        value: ADONASGO
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_UIDS
+        sync: false
+      - key: PREMIUM_KEY
+        sync: false
+      - key: PI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+  - type: web
+    name: dil-pioneers
+    runtime: static
+    buildCommand: echo "site statique, aucune construction"
+    staticPublishPath: ./
+    autoDeployTrigger: commit
